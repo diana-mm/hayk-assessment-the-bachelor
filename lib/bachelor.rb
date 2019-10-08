@@ -2,7 +2,7 @@ require 'pry'
 
 def get_first_name_of_season_winner(data, season)
   # code here	
-  data[season].each do |contestant_stats| #season is list of dicts
+  data[season].each do |contestant_stats|
     if contestant_stats["status"] == "Winner"
       return contestant_stats["name"].split[0]
     end
@@ -46,13 +46,11 @@ def get_average_age_for_season(data, season)
   # code here
   num_contest = 0
   sum_age_contest = 0
-  data.each do|season_contest|
-    season_contest.each do |contest_age|
-      if contest_age["age"] < sum_age_contest
-        sum_age_contest = sum_age_contest + "age" 
-      binding.pry
-      end
-    end
+  data[season].each do|season_contest|
+      age = season_contest["age"].to_f
+      sum_age_contest += age
+      num_contest += 1
   end
+  (sum_age_contest/num_contest).round
 end
 
